@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>login</title>
+  <link rel="stylesheet" href="fontAwesome/css/font-awesome.css">
+  <style>
+    body {
+      background: url("qiya2.jpg") no-repeat;
+      background-size: 100% auto;
+    }
+    .login , .register {
+      cursor: pointer;
+      width: 30%;
+      height: auto;
+      /*border: 1px solid red;*/
+      margin: 0 auto;
+      padding: 20px 50px;
+      margin-top: 15%;
+      text-align: center;
+      color: #FFFFFF;
+      background: #00000050;
+    }
+    .login .form ,.register .form {
+      margin-top: 50px;
+    }
+    .login .form .item , .register .form .item{
+      margin-top: 15px;
+    }
+    .login .form .item input ,.register .form .item input {
+      border: 0;
+      width: 180px;
+      font-size: 18px;
+      outline-style: none;
+      border-bottom: 2px solid white;
+      padding: 5px 10px;
+      background: #FFFFFF00;
+      color: #FFFFFF;
+    }
+    .login button , .register button {
+      outline-style: none;
+      border:none;
+      border-radius: 15px;
+      margin-top: 30px;
+      width: 180px;
+      height: 30px;
+      font-size: 20px;
+      font-weight: 700;
+      color: #FFFFFF;
+      /*background-image: linear-gradient(45deg, #ff9a9e 0%, #fad0c4 99%, #fad0c4 100%);*/
+      /*background-image: linear-gradient(to top, #fbc2eb 0%, #a6c1ee 100%);*/
+      background-image: linear-gradient(120deg, #f6d365 0%, #fda085 100%);
+    }
+    .login button:active , .register button:active {
+      background-image: linear-gradient(to top, #fbc2eb 0%, #a6c1ee 100%);
+    }
+    .login button {
+      width: 100px;
+      font-size: 16px;
+    }
+    .login {
+      /*display: none;*/
+    }
+    .register {
+      display: none;
+    }
+  </style>
+
+</head>
+<body>
+<div class="login" id="login">
+  <h1>login</h1>
+  <div class="form">
+    <div class="item">
+      <i class="fa fa-user-circle" aria-hidden="true"></i>
+      <input type="text" placeholder="Username">
+    </div>
+    <div class="item">
+      <i class="fa fa-key" aria-hidden="true"></i>
+      <input type="password" placeholder="Password">
+    </div>
+  </div>
+  <button class="lo">Login</button>
+  <button class="re">Register</button>
+</div>
+<div class="register">
+  <h1>Register</h1>
+  <div class="form">
+    <div class="item">
+      <i class="fa fa-user-circle" aria-hidden="true"></i>
+      <input type="text" placeholder="Username">
+    </div>
+    <div class="item">
+      <i class="fa fa-key" aria-hidden="true"></i>
+      <input type="text" placeholder="Password">
+    </div>
+  </div>
+  <button class="registerBtn2">Register</button>
+</div>
+</body>
+<script>
+  var register = document.getElementsByClassName('register')[0];
+  var login = document.getElementById('login');
+
+  var registerBtn = document.getElementsByClassName('re')[0];
+  var registerBtn2 = document.getElementsByClassName('registerBtn2')[0];
+
+  var loginBtn = document.getElementsByClassName('lo')[0];
+  var input = document.getElementsByTagName('input');
+
+  loginBtn.onclick = function() {
+    //验证是否可以登录
+    console.log( 'jjj' );
+    var userName = sessionStorage.getItem('userName');
+    var password = sessionStorage.getItem('password');
+    if (input[0].value === userName && input[1].value === password
+        && userName !== null && password !== null) {
+      alert('登录成功！！')
+    } else {
+      alert('用户名或者密码错误！')
+    }
+  };
+  // console.log( registerBtn,login );
+  registerBtn.onclick = function () {
+    // console.log( 'jjj' );
+    setTimeout(function () {
+      login.style.display = 'none';
+      register.style.display = 'block';
+    },500)
+  };
+  registerBtn2.onclick = function () {
+    setTimeout(function () {
+      login.style.display = 'block';
+      register.style.display = 'none';
+
+      var input2_value = input[2].value;
+      var input3_value = input[3].value;
+      if (this.storageSupport()) {
+        var userName = sessionStorage.setItem('userName',input2_value);
+        var password = sessionStorage.setItem('password',input3_value);
+      } else {
+        alert('您的浏览器不支持sessionStorage!')
+      }
+      // console.log(sessionStorage.getItem('userName'),sessionStorage.getItem('password'));
+      // var key = sessionStorage.key(sessionStorage.length - 1);
+      // console.log(sessionStorage.getItem(key))
+      // console.log(input[2].value,input[3].value)
+    },500)
+  };
+
+
+  //操作本地存储的方法
+  //getItem(key)            获取指定的key,存储的value值
+  //key(index)              返回列表中对应索引的key值
+  // length()               返回key/value对列表的长度
+  // removeItem(key)        从Storage中删除一个对应key值
+  // setItem(key,value)     将value存储到key指定的字段
+  // clear()                移除storage中所有key/value对
+  function storageSupport() {
+    try {
+      return 'localStorage' in window && window['localStorage'] !== null ;
+    } catch (e) {
+      return false
+    }
+  }
+  console.log( input);
+</script>
+</html>
